@@ -17,3 +17,5 @@ What currently seems to happen is if no hdd is detected (as in an exact string m
 If anyone knows how to do something more complex than this feel free!
 
 I am not entirely sure how the bios checksum works but the code has been found and marked. I may just bypass it.
+
+Currently it has no modifications
