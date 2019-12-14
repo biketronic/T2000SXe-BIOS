@@ -50,11 +50,16 @@ It boots - so the bios is being read successfully from the EEPROM.
 
 NB 
 5A6D: CP2024 and other HDD identifier list
+
 : Capacity displayed in bios menu "No Drive" "20" etc.
+
 E401: Cylinder-head-sector info for each HDD type
 
+
 MAX: 255 heads (dos limit)
+
 Sectors / track 63 or 255? <8GB should be 63  max
+
 
 
 
