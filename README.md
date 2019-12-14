@@ -21,7 +21,7 @@ I am not entirely sure how the bios checksum works but the code has been found a
 Currently it has no modifications
 
 
-Read the Toshiba TC57H1024D-85 as a M27C1024
+Read the Toshiba TC57H1024D-85 as a M27C1024 in TL-866 programmer
 
 To flash the eeprom
 Buy a m27c1024-10f1 by ST
