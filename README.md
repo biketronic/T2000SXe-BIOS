@@ -122,5 +122,7 @@ Try setting length back to 10 from 5.
 Doesn't work, stuck on 'no disk'
 Not sure why - patched detection so it should detect the disk???
 
+BIOS menu - 4B06 -> 4B18 change capacity pressed
+Currently this does an XOR - could it do an add which overflows back to 0?
 
 
