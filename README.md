@@ -101,8 +101,11 @@ to write edits from IDA pro :-(
 use the write script. Or not
 Edit -> Patch Program -> Apply patches to input file.
 
-Result - does not even display splash page - just a blinking underline type cursor
+Result - does not even display splash page - just a blinking underline type cursor - should give an error!
 
+Try bypassing checksum - 7960 - jnz memory verify fail - set to nop
+
+7960 153926FFFEBF3975 -> 75 -> 90 = NOP  & 796B
 
 
 
