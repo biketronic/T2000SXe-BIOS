@@ -101,6 +101,8 @@ to write edits from IDA pro :-(
 use the write script. Or not
 Edit -> Patch Program -> Apply patches to input file.
 
+Result - does not even display splash page - just a blinking underline type cursor
+
 
 
 
