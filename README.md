@@ -7,10 +7,15 @@ This is licensed as - pay it forward, don't charge for it!
 
 Markup is fairly complete especially in the relevant areas.
 
-The T2000SXe seems to store a limited number of HDD options. There is space for just 6 HDD types to do a string compare. But there is space for at least 14 types of cylinders/etc. to set....
+The T2000SXe seems to store a limited number of HDD options. There is space for just 6 HDD types to do a string compare. But there is space for at least 14 types of cylinders/etc. to set.... The limit should be 14 types.
+
+I suppose some types could be removed to save space?
 
 The plan is if the HDD compare fails to set it to type undefined/USER, which has the maximum sectors etc possible.
 The laptop will then at least boot with a HDD set, and you can use ANYHDD or similar to make it work.
+Also the BIOS menu could be modified to cycle through options rather than none, but it may be overwritten by the bios detection...?
+
+As only 14 types can be set and I have no idea how to add a detection system.
 
 What currently seems to happen is if no hdd is detected (as in an exact string match of 6 HDD types such as CP2064) it won't try and boot one.
 
@@ -22,8 +27,34 @@ Currently it has no modifications
 
 
 Read the Toshiba TC57H1024D-85 as a M27C1024 in TL-866 programmer
+uncheck "check ID" as it's not really this chip
+Now you have a backup of your BIOS.
 
 To flash the eeprom
-Buy a m27c1024-10f1 by ST
+(Or Buy a m27c1024-10f1 by ST and keep the original)
+Blank check - OK
 VPP 12.5V
+VDD write 6.25V
+Puls Delay 100us
+VCC verify 5.00V
+
+Open file .BIN with defaults
+Ascii looks like crap - "A.llR gith seResvrde" - this looks the same as the original chip. It's normal.
+
+Press program (takes 30 sec)
+Verify - success
+
+Now try and boot T2000SXe with original bios and new M27C1024-10F1
+It boots - so the bios is being read successfully from the EEPROM.
+
+
+NB 
+5A6D: CP2024 and other HDD identifier list
+: Capacity displayed in bios menu "No Drive" "20" etc.
+E401: Cylinder-head-sector info for each HDD type
+
+MAX: 255 heads (dos limit)
+Sectors / track 63 or 255? <8GB should be 63  max
+
+
 
