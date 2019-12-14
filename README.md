@@ -107,5 +107,15 @@ Try bypassing checksum - 7960 - jnz memory verify fail - set to nop
 
 7960 153926FFFEBF3975 -> 75 -> 90 = NOP  & 796B
 
+Try reducing length from 10 to 5 for hdd string compare- no difference
+
+Must be another checksum somewhere.
+
+62F1 possible checksum on start
+stc - set carry = fail
+set 6314 f9->90 to NOP
+
+SUCCESS!!!!!!! it now shows text on start
+
 
 
