@@ -118,7 +118,9 @@ set 6314 f9->90 to NOP
 SUCCESS!!!!!!! it now shows text on start
 No drive detected however..
 
-Try setting length back to 10 from 5.
+Try setting length back to 10 from 5. 
+Doesn't work, stuck on 'no disk'
+Not sure why - patched detection so it should detect the disk???
 
 
 
