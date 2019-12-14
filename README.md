@@ -61,7 +61,17 @@ MAX: 255 heads (dos limit)
 Sectors / track 63 or 255? <8GB should be 63  max
 
 
-ATTEMPT#1
+ATTEMPT #1
+MK1722FCV 120mb hdd  - set as type 1
+Heads   8 
+Cyl     842 =34Ah
+Sect    38 = 26h
+WP comp 0
+LZ      842
+Capacity 131MB
+
+Use edit-> patch program -> change byte to change the HDD info
+
 Change to MK1722FCV drive
 E401 - 34Ah,8,ff00,ff,0,0,34ah,26h disk type 10 = new
 E401 00FFFF000008034A
@@ -78,6 +88,18 @@ E409 0026034A00000000
 Change BIOS to read MK instead of 20 (2 character limit :-(
 
 4378 004B4D0065766972 (rive.MK.)
+
+Checksum????? 52A4? 62F1?
+5E38 display bad checksum CMOS.
+62F1 - POST 9 call ???
+
+
+
+
+Use script http://www.openrce.org/downloads/details/57/PE_Scripts
+to write edits from IDA pro :-( 
+use the write script.
+
 
 
 
