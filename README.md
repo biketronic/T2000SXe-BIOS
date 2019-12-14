@@ -61,5 +61,23 @@ MAX: 255 heads (dos limit)
 Sectors / track 63 or 255? <8GB should be 63  max
 
 
+ATTEMPT#1
+Change to MK1722FCV drive
+E401 - 34Ah,8,ff00,ff,0,0,34ah,26h disk type 10 = new
+E401 00FFFF000008034A
+E409 0026034A00000000
+
+5A5A change offset JD-E2825P to equal CP2044 to free up space
+& add MK1722FCV with length of "10" aka Ah
+
+5A5E 5A85405A7E305A7E (5A7E twice)
+5A66 0A085A96605A8F50 (...)
+5A6E 4346323237314B4D (MK1722FC)
+5A76 0000000000000056 (V.......)
+
+Change BIOS to read MK instead of 20 (2 character limit :-(
+
+4378 004B4D0065766972 (rive.MK.)
+
 
 
