@@ -19,3 +19,11 @@ If anyone knows how to do something more complex than this feel free!
 I am not entirely sure how the bios checksum works but the code has been found and marked. I may just bypass it.
 
 Currently it has no modifications
+
+
+Read the Toshiba TC57H1024D-85 as a M27C1024
+
+To flash the eeprom
+Buy a m27c1024-10f1 by ST
+VPP 12.5V
+
