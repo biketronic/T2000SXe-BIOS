@@ -98,7 +98,8 @@ Checksum????? 52A4? 62F1?
 
 Use script http://www.openrce.org/downloads/details/57/PE_Scripts
 to write edits from IDA pro :-( 
-use the write script.
+use the write script. Or not
+Edit -> Patch Program -> Apply patches to input file.
 
 
 
