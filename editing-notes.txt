@@ -1,6 +1,16 @@
 CHECKSUM code
 See testing-notes. This has been bypassed.
-At: 62F1
+At: 62F1 
+stc - set carry = failed checksum
+set 6314 f9->90 to NOP
+DONE.
+
+Confirmed - BIOS now starts. Without, there is no display of any text on boot or any error message.
+
+Also edited 7960 - jnz memory verify fail - set to nop
+7960 153926FFFEBF3975 -> 75 -> 90 = NOP & 796B
+Not sure if this was required.
+
 
 
 HDD detection code
