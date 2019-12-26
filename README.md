@@ -31,3 +31,5 @@ Can select any hdd in bios
 Current 120MB test disk shows ANYDISK so it is reading it!
 It then says "non system disk or disk error"...
 
+More testing required!
+
