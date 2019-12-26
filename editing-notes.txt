@@ -10,17 +10,17 @@ CMOS 12h = set HDD type 00 = not set
 
 5A0B If 35h & 0F = 00 NO HDD (not detected)
 5A15 If 12h & F0 = 00 NO HDD (not set)
-5A1E if 12h & F) <> ch?? NO HDD (mismatch detected and set)
+5A1E if 12h & F) <> ch?? NO HDD (assume mismatch detected and set)
 
-So if it doesn't detect a HDD, any change to 12h in the BIOS menu will fail.
-
+So if it doesn't detect a HDD, any change to 12h in the BIOS menu will fail....
+There isn't a way to detect "no hdd at all" using existing code?
 
 Propose change:
-5A0B : jnz -> NOP (could break something?)
+5A0B : jnz -> NOP (could break something if there really isn't a hdd? - ignore detection)
 5A15 : jz -> LEAVE (so you can set no HDD)
-5A1E : jz -> NOP
+5A1E : jz -> NOP (ignore mismatch)
 
-Result: HDD always detected.
+Result: HDD always detected, use BIOS setting.
 
 
 
