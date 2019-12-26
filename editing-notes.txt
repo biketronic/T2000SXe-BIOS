@@ -52,11 +52,13 @@ mov 12h,28
 
 Hmm seems there is a bug if 12h is not the detected type. But this seems not possible.
 
-Propose change to add 10F
+Propose change:
 4B1f XOR al, cl -> add al, 10h
 4B21 OR ch,al -> leave as is
 
-Since al = set HDD type it will cycle from 0 through to 15. Some strange results may occur.
-But nothing will happen without mods elsewhere.
+Result:
+Since al = set HDD type it will cycle from 0 through to 15.
+I think the bios supports 15 types in theory. Limiting it might be difficult?
+Could change OR ch,al to AND al, 70 - limit to 7 types for example.
 
 
