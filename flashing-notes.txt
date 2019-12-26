@@ -1,0 +1,11 @@
+' ' ' HOW TO FLASH
+
+Read the Toshiba TC57H1024D-85 as a M27C1024 in TL-866 programmer uncheck "check ID" as it's not really this chip Now you have a backup of your BIOS.
+
+To flash the eeprom (Or Buy a m27c1024-10f1 by ST and keep the original, these are $1 on aliexpress) Blank check - OK VPP 12.5V VDD write 6.25V Puls Delay 100us VCC verify 5.00V
+
+Open file .BIN with defaults Ascii looks like crap - "A.llR gith seResvrde" - this looks the same as the original chip. It's normal.
+
+Press program (takes 30 sec) Verify - success
+
+Now try and boot T2000SXe with original bios and new M27C1024-10F1 It boots - so the bios is being read successfully from the EEPROM.
