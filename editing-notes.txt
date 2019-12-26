@@ -17,8 +17,11 @@ There isn't a way to detect "no hdd at all" using existing code?
 
 Propose change:
 5A0B : jnz -> NOP (could break something if there really isn't a hdd? - ignore detection)
+5A0B: 75 22 -> 90 22
 5A15 : jz -> LEAVE (so you can set no HDD)
 5A1E : jz -> NOP (ignore mismatch)
+5A1E: 74 0E -> 90 0E
+DONE.
 
 Result: HDD always detected, use BIOS setting.
 
