@@ -1,1 +1,84 @@
+'
+'
+'
+TESTING NOTES
+
+NB 
+5A6D: CP2024 and other HDD identifier list
+
+: Capacity displayed in bios menu "No Drive" "20" etc.
+
+E401: Cylinder-head-sector info for each HDD type
+
+
+MAX: 255 heads (dos limit)
+
+Sectors / track 63 or 255? <8GB should be 63  max
+
+
+ATTEMPT #1
+MK1722FCV 120mb hdd  - set as type 1
+Heads   8 
+Cyl     842 =34Ah
+Sect    38 = 26h
+WP comp 0
+LZ      842
+Capacity 131MB
+
+Use edit-> patch program -> change byte to change the HDD info
+
+Change to MK1722FCV drive
+E401 - 34Ah,8,ff00,ff,0,0,34ah,26h disk type 10 = new
+E401 00FFFF000008034A
+E409 0026034A00000000
+
+5A5A change offset JD-E2825P to equal CP2044 to free up space
+& add MK1722FCV with length of "10" aka Ah
+
+5A5E 5A85405A7E305A7E (5A7E twice)
+5A66 0A085A96605A8F50 (...)
+5A6E 4346323237314B4D (MK1722FC)
+5A76 0000000000000056 (V.......)
+
+Change BIOS to read MK instead of 20 (2 character limit :-(
+
+4378 004B4D0065766972 (rive.MK.)
+
+Checksum????? 52A4? 62F1?
+5E38 display bad checksum CMOS.
+62F1 - POST 9 call ???
+
+
+
+
+Use script http://www.openrce.org/downloads/details/57/PE_Scripts
+to write edits from IDA pro :-( 
+use the write script. Or not
+Edit -> Patch Program -> Apply patches to input file.
+
+Result - does not even display splash page - just a blinking underline type cursor - should give an error!
+
+Try bypassing checksum - 7960 - jnz memory verify fail - set to nop
+
+7960 153926FFFEBF3975 -> 75 -> 90 = NOP  & 796B
+
+Try reducing length from 10 to 5 for hdd string compare- no difference
+
+Must be another checksum somewhere.
+
+62F1 possible checksum on start
+stc - set carry = fail
+set 6314 f9->90 to NOP
+
+SUCCESS!!!!!!! it now shows text on start
+No drive detected however..
+
+Try setting length back to 10 from 5. 
+Doesn't work, stuck on 'no disk'
+Not sure why - patched detection so it should detect the disk???
+
+BIOS menu - 4B06 -> 4B18 change capacity pressed
+Currently this does an XOR - could it do an add which overflows back to 0?
+
+
 
