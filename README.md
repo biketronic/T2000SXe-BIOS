@@ -26,6 +26,9 @@ I am not entirely sure how the bios checksum works but the code has been found a
 Currently it has no modifications
 
 
+
+HOW TO FLASH
+
 Read the Toshiba TC57H1024D-85 as a M27C1024 in TL-866 programmer
 uncheck "check ID" as it's not really this chip
 Now you have a backup of your BIOS.
@@ -47,6 +50,10 @@ Verify - success
 Now try and boot T2000SXe with original bios and new M27C1024-10F1
 It boots - so the bios is being read successfully from the EEPROM.
 
+
+
+
+TESTING NOTES
 
 NB 
 5A6D: CP2024 and other HDD identifier list
