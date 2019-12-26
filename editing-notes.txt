@@ -23,7 +23,7 @@ Propose change:
 5A1E: 74 0E -> 90 0E
 DONE.
 
-Result: HDD always detected, use BIOS setting.
+Expected Result: HDD detection ignored, use BIOS setting.
 
 
 
@@ -57,11 +57,18 @@ Hmm seems there is a bug if 12h is not the detected type. But this seems not pos
 
 Propose change:
 4B1f XOR al, cl -> add al, 10h
-4B21 OR ch,al -> leave as is
+4B1F: 32 C1 -> 04 10 ? Yes!
+DONE.
 
-Result:
-Since al = set HDD type it will cycle from 0 through to 15.
+Expected Result:
+Since al = set HDD type it will cycle from 0 through to 15, then overflow to 0.
 I think the bios supports 15 types in theory. Limiting it might be difficult?
-Could change OR ch,al to AND al, 70 - limit to 7 types for example.
+Could change OR ch,al to AND al, 70 - limit to 7 types for example. NOT DONE.
 
+
+
+Display HDD Capacity- BIOS
+NOTE: At 437D there are 15 2 byte spaces for HDD sizes displayed by the BIOS when cycling through
+
+HDD Cylinders etc
 
