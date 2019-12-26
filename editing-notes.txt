@@ -4,12 +4,14 @@ At: 62F1
 stc - set carry = failed checksum
 set 6314 f9->90 to NOP
 DONE.
-
-Confirmed - BIOS now starts. Without, there is no display of any text on boot or any error message.
+This was definitely required.
 
 Also edited 7960 - jnz memory verify fail - set to nop
 7960 153926FFFEBF3975 -> 75 -> 90 = NOP & 796B
+DONE.
 Not sure if this was required.
+
+Confirmed - BIOS now starts. Without, there is no display of any text on boot or any error message.
 
 
 
@@ -80,6 +82,9 @@ Could change OR ch,al to AND al, 70 - limit to 7 types for example. NOT DONE.
 
 Display HDD Capacity- BIOS
 NOTE: At 437D there are 15 2 byte spaces for HDD sizes displayed by the BIOS when cycling through
+Without change there will be lots of zeros.
+Currently type 1 changed to "MK"
 
-HDD Cylinders etc
+HDD Cylinders etc for more HDD types
 At: E401
+Currently type 1 changed.
