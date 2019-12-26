@@ -88,3 +88,8 @@ Currently type 1 changed to "MK"
 HDD Cylinders etc for more HDD types
 At: E401
 Currently type 1 changed.
+
+HDD detection code - 35h
+At:5A6D
+Attempted to set anther HDD label of a 120MB hdd "MK1722FCV". No detection??
+ASCII values & pointers left modified. 
