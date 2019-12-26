@@ -1,0 +1,56 @@
+HDD detection code
+At F:5A04 - Write HDD type
+
+CMOS 35h = detected HDD type 08=not found
+CMOS 12h = set HDD type 00 = not set
+
+5A0B If 35h & 0F = 00 NO HDD (not detected)
+5A15 If 12h & F0 = 00 NO HDD (not set)
+5A1E if 12h & F) <> ch?? NO HDD (mismatch detected and set)
+
+So if it doesn't detect a HDD, any change to 12h in the BIOS menu will fail.
+
+Propose change:
+5A0B : jnz -> NOP (could break something?)
+5A15 : jz -> LEAVE (so you can set no HDD)
+5A1E : jz -> NOP
+
+Result: HDD always detected.
+
+At F:4B06 - Change HDD setting in BIOS menu
+
+F:4B1F 
+xor al.cl - al=(12h & F0), cl = (35h & F0h) (from another routine)
+or ch,al - ch = (12h & 0F), al=result
+mov 12h, ch - set 12h to result
+
+Say 12h = type 21 & 35h = type 21
+xor 20,20 = 00
+or 00,00 = 00
+mov 12h, 00 - set 
+
+Say 12h = 08 & 35h = 28
+xor 00,20 = 20
+or 08,20 = 28
+mov 12h,28 - set
+
+As long as 12h and 35h contain either 0 or the same hdd type it will swap values.
+If 12h or 35h use the second byte it will end up there
+
+say 12h = 20, 35h = 08
+xor 20,00 = 20
+or 00,20
+mov 12h,28 
+
+Hmm seems there is a bug if 12h is not the detected type. But this seems not possible.
+
+Propose change to add 10F
+4B1f XOR al, cl -> add al, 10h
+4B21 OR ch,al -> leave as is
+
+Since al = set HDD type it will cycle from 0 through to 15. Some strange results may occur.
+But nothing will happen without mods elsewhere.
+
+
+
+
