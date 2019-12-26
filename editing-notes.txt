@@ -1,5 +1,6 @@
 CHECKSUM code
 See testing-notes. This has been bypassed.
+At: 62F1
 
 
 HDD detection code
@@ -71,4 +72,4 @@ Display HDD Capacity- BIOS
 NOTE: At 437D there are 15 2 byte spaces for HDD sizes displayed by the BIOS when cycling through
 
 HDD Cylinders etc
-
+At: E401
