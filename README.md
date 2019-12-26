@@ -1,7 +1,7 @@
 # T2000SXe-BIOS
 Toshiba T2000SXe BIOS markup / reverse engineering - Goal is to add HDD options. Significant progress made , may be usable.
 
-The BIOS is a removable 1MBit flash chip you can buy for $1 off aliexpress. It is in a socket under the keyboard and easily replacable. But you need flashing hardware. If I get a working version I may consider shipping flashed chips if you can figure out how to contact me :-)
+The BIOS is a removable 1MBit flash chip you can buy for $1 off aliexpress (so you can easily keep the original bios if you want). It is in a socket under the keyboard and easily replacable. But you need flashing hardware. If I get a working version I may consider shipping flashed chips if you can figure out how to contact me :-)
 
 Use of IDA Pro software
 
