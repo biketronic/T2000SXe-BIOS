@@ -26,9 +26,9 @@ I am not entirely sure how the bios checksum works but the code has been found a
 Currently it has no modifications
 
 
-
-
-
+'
+'
+'
 HOW TO FLASH
 
 Read the Toshiba TC57H1024D-85 as a M27C1024 in TL-866 programmer
@@ -54,9 +54,9 @@ It boots - so the bios is being read successfully from the EEPROM.
 
 
 
-
-
-
+'
+'
+'
 TESTING NOTES
 
 NB 
