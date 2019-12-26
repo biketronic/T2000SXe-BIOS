@@ -36,7 +36,7 @@ uncheck "check ID" as it's not really this chip
 Now you have a backup of your BIOS.
 
 To flash the eeprom
-(Or Buy a m27c1024-10f1 by ST and keep the original)
+(Or Buy a m27c1024-10f1 by ST and keep the original, these are $1 on aliexpress)
 Blank check - OK
 VPP 12.5V
 VDD write 6.25V
