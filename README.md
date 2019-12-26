@@ -27,6 +27,8 @@ Currently it has no modifications
 
 
 
+
+
 HOW TO FLASH
 
 Read the Toshiba TC57H1024D-85 as a M27C1024 in TL-866 programmer
@@ -49,6 +51,8 @@ Verify - success
 
 Now try and boot T2000SXe with original bios and new M27C1024-10F1
 It boots - so the bios is being read successfully from the EEPROM.
+
+
 
 
 
