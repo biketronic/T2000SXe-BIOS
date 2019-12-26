@@ -27,3 +27,9 @@ I am not entirely sure how the bios checksum works but the code has been found a
 
 Currently it has no modifications uploaded as a working version is not finished
 See notes for progress.
+
+Modified version:
+Can select any hdd in bios
+Current 120MB test disk shows ANYDISK so it is reading it!
+It then says "non system disk or disk error"... 
+
