@@ -165,15 +165,20 @@ WORKING 120MB SETUP: Toshiba MK1722FCV
 
 Retry 120MB drive:
 Use FDISK to set 842 8 38 - 255967 unallocated 512 byte sectors - correct! (as per above xpert mode)
-create partition and set type to 6 (n, t) = FAT16
+create partition - defaults (max size) and set type to 6 (n, t) = FAT16
 write out
 
-In virtualbox disk shows correctly as 125MByte...
+In virtualbox disk
+fdisk - shows correctly as 125MByte in dos 6.22!!!
 Set to primary partition
 Format c: /s (dos 6.22)
 formatting 123.98MB... 
-try to boot in virtualbox OK
+try to boot in virtualbox OK (I did not complete time and date, just checked Starting MS-DOS appears)
 try in T2000SXe ... SUCCESS - ANYDRIVE shows first, then starting MS-DOS
+is anydrive required? 
+fdisk /mbr -T2000SXe
+No. Starting MS-DOS! no ANYDRIVE.
+
 
 
 
