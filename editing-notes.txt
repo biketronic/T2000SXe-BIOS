@@ -103,13 +103,25 @@ HDD Cylinders etc for more HDD types
 At: E401
 Currently type 1 changed.
 
-HDD detection code - 35h
-At:5A6D
-Attempted to set anther HDD label of a 120MB hdd "MK1722FCV". No detection??
-ASCII values & pointers left modified. 
-
 Propose change 2 - to 4 char labels
 434A - add si, 5 (was 3)
 4352 mov dx,244h (Was 242h) MB text move --> 2 spaces
 Update table at 4374 to 4 char labels (9x5 from 15x3 = 45)
 DONE.
+
+Propose Change HDD list to a range of options for testing:
+1. 40MB CP2024 original option
+2. 60MB CP2064 original option
+3. 120MB MKV
+4. 504MB
+5. 528MB (testing)
+6. 2000MB (testing)
+7. 8000MB (test only)
+
+
+
+HDD detection code - 35h
+At:5A6D
+Attempted to set anther HDD label of a 120MB hdd "MK1722FCV". No detection??
+ASCII values & pointers left modified. 
+Routine not used any more.
