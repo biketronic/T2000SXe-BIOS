@@ -28,8 +28,6 @@ So now there are various options in the BIOS menu for testing CHS limitations an
 So far I have a dying 120MB Toshiba MK1722FCV hdd working without anydrive using updated hardcoded CHS info in bios.
 Getting it working in virtualbox and the T2000SXe was not straightforward. It would often boot in virtualbox but not the T2000SXe.
 So far Dos 6.22 works, not 7.10.
-Have not got a 2GB CF card working. It just hard crashes the bios no matter what ?! Yet works fine in a PCMCIA slot in a T1910CS.
-I will add a DD copy of the 120mb hdd. Perhaps if loaded on other hdds it will work.
+2GB CF card working with DD of 120MB hdd BIOS setting 120MB
 
-More testing required!
-
+So this appears to be a fully working 120MB solution so far. More testing required for larger sizes.
