@@ -1,0 +1,182 @@
+https://modelrail.otenko.com/tag/anydrive
+Create VMDK that points to actual 120MB hdd
+
+sudo VBoxManage internalcommands createrawvmdk -filename /path/to/file.vmdk
+  -rawdisk /dev/sda
+
+sudo VBoxManage internalcommands createrawvmdk -filename /home/eric/VM/Virtualbox/386/120mbg.vmdk -rawdisk /dev/sdg
+
+
+sudo VirtualBox
+
+Create new VM using VMDK drive
+
+it boots dos!
+
+Copy anydrive to mounted hdd
+
+run anydrive: parameters
+
+ Model #     Interface   Heads       Cyls.     Sect.   WP Com    LZ   Capacity
+MK1722FCV   IDE           8         842        38         0    842     131MB
+
+
+CP2064                      4       823         38                      64MB
+
+I used the parameters from the Conner: Quick Reference Guide For Disk Drive Products (Cylinders 980, Heads 5, Sectors 17)
+
+
+ANYDRIVE parameters
+Run ANYDRIVE 0 <Cyl> <Heads> <Sects> ......
+
+ANYDRIVE 0 842 8 38
+
+or
+
+ANYDRIVE 0 823 4 38
+
+or 
+
+ANYDRIVE 0 980 5 17 ???
+
+worked!?
+Breifly flashes HDD then says
+Place system disk in drive
+Press any key when ready :-(
+!No anydrive message!
+
+With bios mod - place system disk in drive, but displays anydrive first
+
+No hdd flash when hdd removed.
+
+
+DOS 6.22 only shows 76mb 120mb hdd in virtualbox.
+I was able to get it to boot but anydisk was still running. it booted on the T2000SXe
+However fdisk reported a strange size.
+I did fdisk /mbr which killed anydisk
+then it would not boot.
+
+Using DOS 7.10 in Virtualbox, fdisk reports 125mb, correct size.
+Format c: /s, copy all files to c:. see if it boots in the T2000SXe?
+Disk IO error. - T2000Sxe
+
+So anydisk + 6.22 did boot at least once, with the wrong hdd size.
+7.10 gives disk error
+
+Retried, ran fdisk /mbr on virtualbox
+
+anydrive attempt
+ANYDRIVE 0 842 8 38
+Says HDD size is 63MB????
+Then reboot, asks for fdd - yes.
+Fdisk, recreate (seems identical) then FORMAT
+Now shows ANYDRIVE
+Disk I.O error
+Maybe it doesn't like dos 7.10 argh.
+
+Dos 6.22 shows it as a non dos partition.
+Delete partition, create new, format c: /s 76MB
+Copy a:*.* c:/dos
+Now it says "non system disk or disk error"
+
+With the bios set at 60MB it has the same error.
+
+try booting anydisk then formatting?
+
+anydrive s
+OK interestingly anydisk reports "TRACKS" not cylinders 
+842 / 8 / 38
+155610 sectors = 76 MByte PrecSect 38 (155610 * 512 = 76MByte) Should be 25k sectors...
+interesting....
+1 cylinder = set of tracks. A track is segments of sectors. A sectors i 512 bytes.
+
+Tried anydrive -> fdisk 25% (20mb partition)
+Now it just shows anydrive and a blinking _ char on the T2000SXe
+
+ OK retry with dos 7.1
+Fdisk shows 125MB
+Create 25% partition 31MB
+Format - 19MB ??? how is that possible?
+create 100% partition 
+format - 19MB ???????
+BINGO get anydrive boots to a _, can't press left shift....
+format only formats 19MB now wtf
+delete partition - anydisk now asks to boot from a
+fdisk - create 25% 31MB partition
+boot - anydisk left shift works - boot a
+format c: /s - - 31.22MB!!!!
+
+On boot anydrive says press any key to boot from a - T2000SXe
+
+Does the same in virtualbox
+
+set active partition 1 - now it boots in virtualbox
+T2000SXe - invalid system disk... argh
+
+use 6.22
+Boot using left shift anydisk
+format c:/s using 6.22
+it boots in virtualbox.
+T2000SXe - non system disk or disk error... argh
+
+all fdds have failed drive bands.
+
+in virtualbox, it shows invalid media type reading drive c if booted from a
+partition shows 20mb in fdisk (not 31MB!)
+c says missing operating system, cannot press left shift
+format c:/s (no anydisk) & copy to c:/dos
+boots c with anydisk now.
+With T2000SXe it shows anydisk... _ stuck on _ again
+But boots in virtualbox.
+
+@#$%@#%#$
+Cannot get T2000SXe to accept the hdd... no idea why
+
+
+TRY 2GB CF CARD - FAILS
+
+Try fdisk /dev/sdh (CF card)
+xpert mode x
+
+Force chs to be 1024 16 63 (likely limit)
+c, h, s
+
+r return to main menu
+v verify (nothing happens)
+p print partition table
+d delete partition 1 (no partition selection it just deletes it)
+n add a new partition
+first sector default 2048 (min 2048) – to 30,000 sectors (17MB)
+v verify alarms that there is only a small partition
+l, t partition type 6 - FAT16
+w write
+
+Boot in virtualbox
+Correct size hdd ? no? 13.64MB
+shows FAT12 type in fdisk. But shows total disk space 1906MB in dos 6.22
+virtualbox won't boot it.
+T2000SXe does the blank stare - shows mem information and _ with 504MB setting.
+Try 120MB setting for fun.
+it really doesn't like this CF card... no dice either. Just bombs
+Oh dear.
+
+
+WORKING 120MB SETUP: Toshiba MK1722FCV
+
+Retry 120MB drive:
+Use FDISK to set 842 8 38 - 255967 unallocated 512 byte sectors - correct! (as per above xpert mode)
+create partition and set type to 6 (n, t) = FAT16
+write out
+
+In virtualbox disk shows correctly as 125MByte...
+Set to primary partition
+Format c: /s (dos 6.22)
+formatting 123.98MB... 
+try to boot in virtualbox OK
+try in T2000SXe ... SUCCESS - ANYDRIVE shows first, then starting MS-DOS
+
+
+
+
+
+
