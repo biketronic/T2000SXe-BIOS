@@ -78,6 +78,20 @@ Since al = set HDD type it will cycle from 0 through to 15, then overflow to 0.
 I think the bios supports 15 types in theory. Limiting it might be difficult?
 Could change OR ch,al to AND al, 70 - limit to 7 types for example. NOT DONE.
 
+Propose change - limit to 7 HDD types
+compare ... lots of work
+Propose alternate change
+4B13 and al,0F0h --> and al, 07h
+This will not be used unless there is another increment, so it actually supports up to 8!
+But then no hdd is not an option (great?) temp change for testing. FIXME
+Propose alt change 2:
+4B10 and ch, 0Fh -> and ch, F0h (equals al)
+4B1f add al, 10h -> add ch, 10h
+4B21 or ch, al -> and ch, 70h
+Propose #3
+4B13 and al, F0h -> add al, 10h (24 F0 -> 04 10)
+4B1f add al, 10h -> and al, 70h (04 10 -> 24 70)
+DONE.
 
 
 Display HDD Capacity- BIOS
@@ -93,3 +107,9 @@ HDD detection code - 35h
 At:5A6D
 Attempted to set anther HDD label of a 120MB hdd "MK1722FCV". No detection??
 ASCII values & pointers left modified. 
+
+Propose change 2 - to 4 char labels
+434A - add si, 5 (was 3)
+4352 mov dx,244h (Was 242h) MB text move --> 2 spaces
+Update table at 4374 to 4 char labels (9x5 from 15x3 = 45)
+DONE.
