@@ -31,4 +31,4 @@ So far Dos 6.22 works, not 7.10.
 2GB CF card working with DD of 120MB hdd BIOS setting 120MB
 2GB CF card working with 500MB partition BIOS setting 504MB
 
-So this appears to be a fully working 12-5040MB solution so far. More testing required for larger sizes.
+So this appears to be a fully working 120-504MB solution so far. More testing required for larger sizes.
