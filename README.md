@@ -15,6 +15,12 @@ What happens with the normal BIOS is if no hdd is detected (as in an exact strin
 
 See notes for progress and all the trials and errors, and bios edit locations.
 
+There are 3 parts to this work:
+
+1. HDD Setup - you need to format the hdd to match the CHS setting
+2. BIOS mods - byte edits in the bios to enable the HDD CHS settings
+3. Flashing info - how to flash the BIN image to an EPROM
+
 Currently the simplest option has been to:
 Disable the checksum so it boots
 Change BIOS menu to cycle through options rather than HDD/NO HDD (increased to 4 digit hdd sizes)
