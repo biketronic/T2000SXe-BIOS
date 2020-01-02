@@ -180,6 +180,46 @@ fdisk /mbr -T2000SXe
 No. Starting MS-DOS! no ANYDRIVE.
 
 
+Attempt CF card
+CF card does not show up in IDE adapter...!!!!
+Use CF adapter...
+
+sudo dd if=./MK1722FCV-622-T2000SXe2.IMG of=/dev/sdh
+255968+0 records in
+255968+0 records out
+131055616 bytes (131 MB, 125 MiB) copied, 55.9129 s, 2.3 MB/s
+
+Wrong jumper on the card - must be set to the 2 closest pins to the IDE connector, was the 2 far ones.
+Now reads with IDE adapter.
+Boots dos with 120MB bios setting.
+
+OK now CF is working... set to 504MB
+FDISK sectors for partition - 2048 - 3903975 =2gb? 1024x63x16 = 1032192
+Yes = 503MB partition
+However virtualbox shows 125MB total disk space ??? w t f 
+format c: /s - 121MB, cannot boot it in virtualbox
+wonder if it used a GPT partition by mistake...
+fdisk -> x -> chs 1024,16,63 -> r
+-> o write dos partition table
+-> p no partitions
+-> n create to 1032192
+
+No reason for virtualbox to show 125MB unless it's not erased on the disk or recreate 120.vmbk
+try recreate vmdk file
+6.22 fdisk now reports 1906MBytes... partition 1 is 503MB but it's NON-DOS. argh
+>>linux
+fdisk -> t 6 -> w write FAT16
+>> virtualbox
+All reports correctly BUT format c: /s only does 123.98m w t f
+try fdisk /mbr 
+Still 123MB
+FOR FUCKS SAKE WHERE IS THIS BULLSHIT COMING FROM?!
+Fdisk - delete partitions, recreate 500MB partition
+Now format formats 500MB.
+Now virtualbox boots CF card.
+
+T2000SXe boots as 504MB HDD!
+Fdisk reports total disk space is 504MB 
 
 
 
