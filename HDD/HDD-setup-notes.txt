@@ -1,5 +1,12 @@
 With bios mod:
 
+The easy way:
+DD one of the tested images e.g.
+DD if=2GBCF-622-504MB-2.IMG of=/dev/sdg (for example >500MB HDD/CF) Designed for 2GB CF card but others probably work.
+DD if=MK1722FCV-622-T2000SXe2.IMG of=/dev/sdg (for example >120MB HDD/CF) This works on a 2GB CF card as well.
+
+The hard way:
+
 Requirements: Virtualbox on linux
 External HDD adapter - I used ESATA -> SATA - 2.5" IDE adapter, direct USB did not work for me.
 
