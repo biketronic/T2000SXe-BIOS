@@ -1,0 +1,166 @@
+CHECKSUM code
+See testing-notes. This has been bypassed.
+At: 62F1 
+stc - set carry = failed checksum
+set 6314 f9->90 to NOP
+DONE.
+This was definitely required.
+
+Also edited 7960 - jnz memory verify fail - set to nop
+7960 153926FFFEBF3975 -> 75 -> 90 = NOP & 796B
+DONE.
+Not sure if this was required.
+
+Confirmed - BIOS now starts. Without, there is no display of any text on boot or any error message on an edited image.
+
+
+
+HDD detection code - 35h
+At:5A6D
+Attempted to set anther HDD label of a 120MB hdd "MK1722FCV". No detection??
+ASCII values & pointers left modified. 
+Routine not used any more.
+At F:5A04 - Write HDD type
+Change to MK1722FCV drive
+E401 - 34Ah,8,ff00,ff,0,0,34ah,26h disk type 10 = new
+E401 00FFFF000008034A
+E409 0026034A00000000
+
+5A5A change offset JD-E2825P to equal CP2044 to free up space
+& add MK1722FCV with length of "10" aka Ah
+
+5A5E 5A85405A7E305A7E (5A7E twice)
+5A66 0A085A96605A8F50 (...)
+5A6E 4346323237314B4D (MK1722FC)
+5A76 0000000000000056 (V.......)
+
+Change BIOS to read MK instead of 20 (2 character limit :-(
+
+4378 004B4D0065766972 (rive.MK.)
+
+This did not seem to work. This code is no longer used as it is too limiting anyway.
+
+
+
+HDD detection code 2
+CMOS 35h = detected HDD type 08=not found
+CMOS 12h = set HDD type 00 = not set
+
+5A0B If 35h & 0F = 00 NO HDD (not detected)
+5A15 If 12h & F0 = 00 NO HDD (not set)
+5A1E if 12h & F) <> ch?? NO HDD (assume mismatch detected and set)
+
+So if it doesn't detect a HDD, any change to 12h in the BIOS menu will fail....
+There isn't a way to detect "no hdd at all" using existing code?
+
+Propose change:
+5A0B : jnz -> NOP (could break something if there really isn't a hdd? - ignore detection)
+5A0B: 75 22 -> 90 22
+5A15 : jz -> LEAVE (so you can set no HDD)
+5A1E : jz -> NOP (ignore mismatch)
+5A1E: 74 0E -> 90 0E
+DONE.
+
+Expected Result: HDD detection ignored, use BIOS setting.
+
+
+
+
+At F:4B06 - Change HDD setting in BIOS menu
+
+F:4B1F 
+xor al.cl - al=(12h & F0), cl = (35h & F0h) (from another routine)
+or ch,al - ch = (12h & 0F), al=result
+mov 12h, ch - set 12h to result
+
+Say 12h = type 21 & 35h = type 21
+xor 20,20 = 00
+or 00,00 = 00
+mov 12h, 00 - set 
+
+Say 12h = 08 & 35h = 28
+xor 00,20 = 20
+or 08,20 = 28
+mov 12h,28 - set
+
+As long as 12h and 35h contain either 0 or the same hdd type it will swap values.
+If 12h or 35h use the second byte it will end up there
+
+say 12h = 20, 35h = 08
+xor 20,00 = 20
+or 00,20
+mov 12h,28 
+
+Hmm seems there is a bug if 12h is not the detected type. But this seems not possible.
+
+Propose change:
+4B1f XOR al, cl -> add al, 10h
+4B1F: 32 C1 -> 04 10 ? Yes!
+DONE.
+
+Expected Result:
+Since al = set HDD type it will cycle from 0 through to 15, then overflow to 0.
+I think the bios supports 15 types in theory. Limiting it might be difficult?
+Could change OR ch,al to AND al, 70 - limit to 7 types for example.
+
+Propose change - limit to 7 HDD types
+compare ... lots of work
+Propose alternate change
+4B13 and al,0F0h --> and al, 07h
+This will not be used unless there is another increment, so it actually supports up to 8!
+But then no hdd is not an option (great?) temp change for testing. FIXME
+Propose alt change 2:
+4B10 and ch, 0Fh -> and ch, F0h (equals al)
+4B1f add al, 10h -> add ch, 10h
+4B21 or ch, al -> and ch, 70h
+Propose #3
+4B13 and al, F0h -> add al, 10h (24 F0 -> 04 10)
+4B1f add al, 10h -> and al, 70h (04 10 -> 24 70)
+DONE.
+
+
+Display HDD Capacity- BIOS
+NOTE: At 437D there are 15 2 byte spaces for HDD sizes displayed by the BIOS when cycling through
+Without change there will be lots of zeros.
+Currently type 1 changed to "MK"
+
+HDD Cylinders etc for more HDD types
+At: E401
+Currently type 1 changed.
+
+Propose change 2 - to 4 char labels
+434A - add si, 5 (was 3)
+4352 mov dx,244h (Was 242h) MB text move --> 2 spaces
+Update table at 4374 to 4 char labels (9x5 from 15x3 = 45)
+DONE.
+
+Propose Change HDD list to a range of options for testing:
+1. 40MB CP2044 original option
+2. 60MB CP2064 original option
+3. 120MB MKV
+4. 504MB
+5. 528MB (testing)
+6. 2000MB (testing)
+7. 8000MB (test only)
+DONE
+Change cylinders to match...
+
+was:
+120MBMK 4A 03 08 00 00 FF FF 00 00 00 00 00 4A 03 26 00
+20MB JD 45 02 02 00 00 FF FF 00 00 00 00 00 45 02 24 00
+40MB CP D4 03 05 00 00 FF FF 00 00 00 00 00 D4 03 11 00
+40MB JD 17 03 03 00 00 FF FF 00 00 00 00 00 17 03 23 00
+30MB CP 9B 01 04 00 00 FF FF 00 00 00 00 00 9B 01 26 00
+60MB CP 37 03 04 00 00 FF FF 00 00 00 00 00 37 03 26 00
+
+1. D4 03 05 00 00 FF FF 00 00 00 00 00 D4 03 11 00
+2. 37 03 04 00 00 FF FF 00 00 00 00 00 37 03 26 00
+3. 4A 03 08 00 00 FF FF 00 00 00 00 00 4A 03 26 00
+4. .... 1024 16 63 (504MB)
+5 ..... 1024 16 255 (2GB TEST)
+6 ..... 8000 16 63 (4GB TEST)
+7 ..... 1024 255 63 (8GB TEST)
+DONE
+
+BUG:
+BIOS DISPLAYS 2030, 4000, 8500MB - NOT SURE HOW THIS IS POSSIBLE FIXME
