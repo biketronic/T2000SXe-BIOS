@@ -64,7 +64,7 @@ GOTCHAS:
     Check the jumper on the CF adapter, should jump the 2 closest pins to the IDE interface
     I.e. master setting not slave
 
-2.2 Stops after memory test
+2.2 Stops after memory test (cleared screen)
 2.2.1 Shows _ only
         fdisk /mbr in virtualbox seems to fix this
 
