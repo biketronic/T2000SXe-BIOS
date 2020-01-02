@@ -137,11 +137,11 @@ DONE.
 Propose Change HDD list to a range of options for testing:
 1. 40MB CP2044 original option
 2. 60MB CP2064 original option
-3. 120MB MKV
-4. 504MB
-5. 528MB (testing)
-6. 2000MB (testing)
-7. 8000MB (test only)
+3. 120MB MKV (CHS 842 8 38)
+4. 504MB (MAX)
+5. 2000MB (testing)
+6. 4000MB (testing)
+7. 8000MB (testing)
 DONE
 Change cylinders to match...
 
