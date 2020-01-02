@@ -20,6 +20,7 @@ There are 3 parts to this work:
 1. HDD Setup - you need to format the hdd to match the CHS setting
 2. BIOS mods - byte edits in the bios to enable the HDD CHS settings
 3. Flashing info - how to flash the BIN image to an EPROM
+4. FDD notes - replacement drive band info for FDD - hard to set up hdd without a working fdd but possible.
 
 Currently the simplest option has been to:
 Disable the checksum so it boots
