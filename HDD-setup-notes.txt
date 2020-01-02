@@ -213,13 +213,12 @@ fdisk -> t 6 -> w write FAT16
 All reports correctly BUT format c: /s only does 123.98m w t f
 try fdisk /mbr 
 Still 123MB
-FOR FUCKS SAKE WHERE IS THIS BULLSHIT COMING FROM?!
 Fdisk - delete partitions, recreate 500MB partition
 Now format formats 500MB.
 Now virtualbox boots CF card.
 
-T2000SXe boots as 504MB HDD!
-Fdisk reports total disk space is 504MB 
+T2000SXe boots as 500MB HDD!
+Fdisk reports total disk space is 504MB (99% used)
 
 
 
