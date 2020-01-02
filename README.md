@@ -29,5 +29,6 @@ So far I have a dying 120MB Toshiba MK1722FCV hdd working without anydrive using
 Getting it working in virtualbox and the T2000SXe was not straightforward. It would often boot in virtualbox but not the T2000SXe.
 So far Dos 6.22 works, not 7.10.
 2GB CF card working with DD of 120MB hdd BIOS setting 120MB
+2GB CF card working with 500MB partition BIOS setting 504MB
 
 So this appears to be a fully working 120MB solution so far. More testing required for larger sizes.
