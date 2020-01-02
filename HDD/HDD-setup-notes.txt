@@ -1,0 +1,128 @@
+With bios mod:
+
+Requirements: Virtualbox on linux
+External HDD adapter - I used ESATA -> SATA - 2.5" IDE adapter, direct USB did not work for me.
+
+Setup and run Virtualbox with a real external drive:
+    sudo VBoxManage internalcommands createrawvmdk -filename ~/SDG500MB.vmdk -rawdisk /dev/sdg (for example)
+    sudo VirtualBox
+    Then Create a new virtual machine and assign Dos 6.22 FDD and the e.g. SDG500MB.vmdk as the hdd
+    Now Start the virtual machine. Reset and F12 are useful to check for boot errors. It should boot the FDD to a dos prompt.
+
+Set up hdd from scratch:
+        linux - fdisk /dev/sdg (for example):
+        Delete partition (d)
+        Expert mode (x)
+        Cylinders 1024 (c 1024)
+        Heads 16 (h 16)
+        Sectors/track 63 (s 63)
+        Return (r)
+        Verify (v) should complain there is no partition
+        Write dos parition (o)
+        Print partitions (p) should be no patritions
+        Create partition (n)
+        Start point 2048, end point 1032192 (1024x63x16)
+        Change Type (t)
+        to FAT16 (6)
+        Verify (v) should complain about not all space used
+        Write (w)
+        
+        Booting /dev/sdg (for example) in virtualbox and
+        Fdisk - Delete partition and create 500MB Partition
+        Fdisk - Set partition Active
+        Format c: /s
+        fdisk /mbr
+
+        Copy dos across if you like:
+        c:
+        mkdir dos
+        cd dos
+        copy A:*.*
+
+        May need to redo CHS in linux fdisk expert mode, then redo partitions in virtualbox etc as above.
+
+        
+GOTCHAS:
+
+1. virtualbox dos fdisk problems:
+1.1 shows a strange MB size value (does not match intended size)
+    a. shows size of another disk? 
+        ai. use of the same vmdk file for 2 disks at e.g. /dev/sdg. Need a new vmdk for each disk
+        aii. delete all partitions with dos fdisk and recreate 500MB partition.
+    b. shows a disk size (i.e. actual size) larger than 504MB? it's normal, but can't use >504MB
+1.2 shows non-dos partition
+    a. Linux fdisk /dev/sdg -> t 6 (change hdd type to FAT16)
+2 Does not boot c: in virtualbox
+    Check partition type is PRI DOS in DOS fdisk -> 1.2.a
+    It won't boot on the T2000SXe, if it won't boot in virtualbox by the way.
+
+
+2. T2000SXe does not boot
+
+2.1 Stops on memory test display with _ 
+    This means there is no HDD at all.
+    Check the jumper on the CF adapter, should jump the 2 closest pins to the IDE interface
+    I.e. master setting not slave
+
+2.2 Stops after memory test
+2.2.1 Shows _ only
+        fdisk /mbr in virtualbox seems to fix this
+
+2.2.2 Shows "Disk IO Error"
+        You are using DOS 7.1. Try DOS 6.22
+
+2.2.3 Shows "non system disk or disk error"
+        Bad partition information
+        Set up from scratch (3)
+2.2.4 Shows "missing operating system"
+        Bad partition information
+        Set up from scratch (3)
+2.2.5 Shows " invalid system disk"
+        DOS 7.1 used. Try DOS 6.22
+2.2.6 Shows "place sytem disk in drive"
+        Deleted partition?
+        BIOS set to No HDD?        
+
+2.2.7 but it boots in virtualbox!
+        May need to re-run fdisk and enter cylinders again.
+        linux - fdisk /dev/sdg (for example):
+        Expert mode (x)
+        Cylinders 1024 (c 1024)
+        Heads 16 (h 16)
+        Sectors/track 63 (s 63)
+        Return (r)
+        Write (w)
+
+        Booting /dev/sdg (for example) in virtualbox and
+        Fdisk - Delete partition and create 500MB Partition
+        Fdisk - Set partition Active
+        Format c: /s
+        fdisk /mbr
+      
+
+ANYDRIVE:
+ANYDRIVE says it only supports max 504MB HDDs.
+But it could be useful for 0-504MB HDD sizes
+as the BIOS options are limited to pre-set values.
+
+Anydrive can be installed using Virtualbox.
+e.g.
+ANYDRIVE 0 1024 16 63
+Then boot virtualbox F12 select 1 IDE HDD quickly press left shift
+anydrive will say "boot from a:"
+then fdisk/format c:/s
+The advantage is it shows anydisk before an error so you can see that
+the HDD is being read on the T2000SXe
+It's probably the same as getting past the memory test screen.
+It is not required at all.
+fdisk /mbr removes it.
+
+EZ-DRIVE:
+EZ-DRIVE supposedly needs 4MB ram so I haven't tried it. (I have 2MB)
+
+
+NOTE Without BIOS mod:
+T2000SXe Briefly flashes HDD led then says
+Place system disk in drive
+Press any key when ready
+!No anydrive message if anydrive installed! It is not even reading the HDD.
