@@ -3,8 +3,6 @@ Toshiba T2000SXe BIOS markup / reverse engineering - Goal is to add HDD options 
 
 Current status: working.
 
-This is licensed as - pay it forward, don't charge for it!
-
 The BIOS is a removable 1MBit flash chip you can buy for $1 off aliexpress (so you can easily keep the original bios if you want). It is in a socket under the keyboard and easily replacable. But you need flashing hardware.
 
 Use of IDA Pro software to reverse engineer.
@@ -34,3 +32,5 @@ So far Dos 6.22 works, not 7.10.
 
 So far it is a fully working solution. 504MB seems to be the limit.
 Known BUG - Bios options show testing options 2030MB and 8500MB not 2000MB and 8000MB.
+
+Contact me @ gmail.com, ericgordonnz
